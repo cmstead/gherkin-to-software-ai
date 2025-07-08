@@ -4,11 +4,15 @@ from src.agents.gherkin_to_software.steps.debug_failed_tests import debug_failin
 
 def run_software_build():
     #read gherkin
+    
     #get jest code
     #write tests to file
+    
     #get production code
     #write code to file
+    
     #run test suite
     #debug failing tests as necessary
     #write debugged code to file
+    
     return True
