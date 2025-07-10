@@ -1,0 +1,37 @@
+Feature: Make Change
+
+  Scenario: Make change for 0
+    Given the amount of money is 0
+    When makeChange is called with amount of money
+    Then makeChange returns an empty array, []
+
+  Scenario: Make change for 0.01
+    Given the amount of money is 0.01
+    When makeChange is called with amount of money
+    Then makeChange returns an array of one penny [[1, 0.01]]
+
+  Scenario: Make change for 0.05
+    Given the amount of money is 0.05
+    When makeChange is called with amount of money
+    Then makeChange returns an array of one nickel [[1, 0.05]]
+
+  Scenario: Make change for 0.10
+    Given the amount of money is 0.10
+    When makeChange is called with amount of money
+    Then makeChange returns an array of one dime [[1, 0.10]]
+
+  Scenario: Make change for 0.25
+    Given the amount of money is 0.25
+    When makeChange is called with amount of money
+    Then makeChange returns an array of one quarter [[1, 0.25]]
+
+  Scenario: Make change for 1.00
+    Given the amount of money is 1.00
+    When makeChange is called with amount of money
+    Then makeChange returns an array of one dollar [[1, 1]]
+
+  Scenario: Make change for 2.68
+    Given the amount of money is 2.68
+    When makeChange is called with amount of money
+    Then makeChange returns an array containing 2 dollars, 2 quarters, 1 dime, 1 nickel, and 3 pennies
+

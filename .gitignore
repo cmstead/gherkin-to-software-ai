@@ -26,4 +26,8 @@ node_modules
 
 .env
 
-generated-output
+_result_output/*.js
+_result_output/*.json
+_source_input/*.feature
+
+node_modules
