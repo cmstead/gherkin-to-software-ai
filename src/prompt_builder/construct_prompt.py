@@ -1,6 +1,7 @@
 from src.prompt_types.gherkin_to_jest import PROMPT_FIELDS as GHERKIN_PROMPT_FIELDS, get_prompt as get_gherkin_prompt
 from src.prompt_types.jest_to_software import PROMPT_FIELDS as JEST_PROMPT_FIELDS, get_prompt as get_jest_prompt
 from src.prompt_types.debug_failed_tests import PROMPT_FIELDS as DEBUG_TEST_FIELDS, get_prompt as get_debug_prompt
+from src.prompt_types.add_import_statements import PROMPT_FIELDS as ADD_IMPORT_PROMPT_FIELDS, get_prompt as get_add_import_prompt
 from src.prompt_types.prompt_type_constants import PROMPT_TYPES
 
 def get_constructed_prompt(prompt_type, prompt_values):
@@ -16,6 +17,9 @@ def get_constructed_prompt(prompt_type, prompt_values):
     elif prompt_type == PROMPT_TYPES["JEST_TO_SOFTWARE"]:
         prompt_fields = JEST_PROMPT_FIELDS
         prompt = get_jest_prompt()
+    elif prompt_type == PROMPT_TYPES["ADD_IMPORT_STATEMENTS"]:
+        prompt_fields = ADD_IMPORT_PROMPT_FIELDS
+        prompt = get_add_import_prompt()
     else:
         raise ValueError(f"Unknown prompt type: {prompt_type}")
     
