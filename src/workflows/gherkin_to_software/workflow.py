@@ -1,5 +1,4 @@
-import subprocess
-
+from src.utils.run_tests import run_tests
 from src.utils.fs import read_file, write_file
 
 from src.workflows.gherkin_to_software.steps.gherkin_to_jest import get_jest_tests
@@ -39,27 +38,35 @@ def run_software_build(feature_name):
     write_file(test_path, jest_tests)
 
     #run test suite
-    command = f"npm test"
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=base_path, shell=True)
-
-    stdout, stderr = process.communicate()
-    exit_code = process.returncode
+    stdout, exit_code = run_tests(base_path)
+    
+    if(stdout == None):
+        return False
     
     if(exit_code):
-        #debug failing tests as necessary
-        updated_code = debug_failing_tests({
-            "Persona": persona,
-            "Source Code": draft_code,
-            "Debug Output": stdout.decode('utf-8'),
-            "Unit Tests": jest_tests,
-        })
+        rerun_count = 5
+        updated_code = draft_code
+        
+        while rerun_count > 0 and exit_code:
+            print(f"Tests failed, rerunning... {rerun_count} attempts left.")
+            rerun_count -= 1
+            
+            #debug failing tests
+            updated_code = debug_failing_tests({
+                "Persona": persona,
+                "Source Code": draft_code,
+                "Debug Output": stdout.decode('utf-8'),
+                "Unit Tests": jest_tests,
+            })
+            
+            stdout, exit_code = run_tests(base_path)
+            print(stdout.decode('utf-8'))
+            
+            if exit_code == 0:
+                break
         
         write_file(file_path, updated_code)
 
-        command = f"npm test"
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=base_path, shell=True)
-
-        stdout, stderr = process.communicate()
         print(stdout.decode('utf-8'))
     else:
         print('All tests passed successfully.')
