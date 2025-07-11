@@ -1,4 +1,4 @@
-from src.agents.gherkin_to_software.agent import run_software_build
+from src.workflows.gherkin_to_software.agent import run_software_build
 
 def main():
     run_software_build("make_change")    
