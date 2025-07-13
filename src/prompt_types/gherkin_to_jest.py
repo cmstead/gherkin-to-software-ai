@@ -1,3 +1,4 @@
+from src.constants import SCRIPT_ROOT
 from src.utils.fs import read_file
 
 PROMPT_FIELDS = [
@@ -6,4 +7,4 @@ PROMPT_FIELDS = [
 ]
 
 def get_prompt():
-    return read_file("ai_files/prompts/gherkin-to-jest.md")
+    return read_file(f"{SCRIPT_ROOT}/ai_files/prompts/gherkin-to-jest.md")

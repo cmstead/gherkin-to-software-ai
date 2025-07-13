@@ -1,7 +1,8 @@
+from src.constants import SCRIPT_ROOT
 from src.utils.run_tests import run_tests
 from src.utils.fs import read_file, write_file
 
-from src.workflows.gherkin_to_software.steps.gherkin_to_jest import get_jest_tests
+from src.workflows.gherkin_to_tests.steps.gherkin_to_jest import get_jest_tests
 from src.workflows.gherkin_to_software.steps.jest_to_software import get_draft_code
 from src.workflows.gherkin_to_software.steps.add_import_statements import add_import_statements
 from src.workflows.debug_software.steps.debug_failed_tests import debug_failing_tests
@@ -14,7 +15,7 @@ def run_software_build(feature_name):
     test_path = f"{base_path}{test_fileName}"
     file_path = f"{base_path}{file_name}"
 
-    persona = read_file("ai_files/personas/software-developer.md")
+    persona = read_file(f"{SCRIPT_ROOT}/ai_files/personas/software-developer.md")
     gherkin_spec = read_file(f"_source_input/{feature_name}.feature")
     
     jest_tests = get_jest_tests({
