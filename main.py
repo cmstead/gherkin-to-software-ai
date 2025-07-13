@@ -1,4 +1,6 @@
 import inquirer
+
+from src.constants import CWD
 from src.workflows.gherkin_to_tests.workflow import run_test_build
 
 def main():
@@ -8,8 +10,8 @@ def main():
         inquirer.Text("test_path", message="Enter path to test files:", default="__tests__")
     ])
     
-    feature_file_path = f"{results['feature_path']}/{results['feature_name']}.feature"
-    feature_test_path = f"{results['test_path']}/{results['feature_name']}.spec.js"
+    feature_file_path = f"{CWD}/{results['feature_path']}/{results['feature_name']}.feature"
+    feature_test_path = f"{CWD}/{results['test_path']}/{results['feature_name']}.spec.js"
     
     run_test_build(feature_file_path, feature_test_path)
 
